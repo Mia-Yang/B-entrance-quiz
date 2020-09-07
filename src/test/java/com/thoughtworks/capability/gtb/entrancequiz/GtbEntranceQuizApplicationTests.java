@@ -28,7 +28,7 @@ class GtbEntranceQuizApplicationTests {
 
 	@Test
 	void should_get_name_list() throws Exception {
-		mockMvc.perform(get("/group/nameList"))
+		mockMvc.perform(get("/list"))
 				.andExpect(jsonPath("$", hasSize(3)))
 				.andExpect(jsonPath("$[0].id",is(1)))
 				.andExpect(jsonPath("$[0].name",is("杨思雨")))
@@ -44,13 +44,12 @@ class GtbEntranceQuizApplicationTests {
 		Person person = new Person(4, "哈哈");
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonString = objectMapper.writeValueAsString(person);
-		mockMvc.perform(post("/group/person").content(jsonString).contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(post("/list").content(jsonString).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
-		mockMvc.perform(get("/group/nameList"))
+		mockMvc.perform(get("/list"))
 				.andExpect(jsonPath("$", hasSize(4)))
 				.andExpect(jsonPath("$[3].id",is(4)))
 				.andExpect(jsonPath("$[3].name",is("哈哈")))
 				.andExpect(status().isOk());
-
 	}
 }
