@@ -30,8 +30,8 @@ public class PersonApi {
     public List<Person> getNameList() {return nameList;}
 
     @PostMapping("/list")
-    public void addPerson(@RequestBody Person person) {
-        nameList.add(person);
+    public void addPerson(@RequestBody String inputName) {
+        nameList.add(new Person(nameList.size()+1, inputName));
     }
 
 }
